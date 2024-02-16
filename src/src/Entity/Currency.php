@@ -20,8 +20,15 @@ class Currency
     #[ORM\Column]
     private ?float $value = null;
 
+    #[ORM\Column]
+    private int $visible = 0;
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datetime_add = null;
+
+    public function __construct() {
+        $this->setDatetimeAdd(new \DateTime());
+    }
 
     public function getId(): ?int
     {
@@ -48,6 +55,18 @@ class Currency
     public function setValue(float $value): static
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getVisible(): int
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(float $visible): static
+    {
+        $this->visible = $visible;
 
         return $this;
     }

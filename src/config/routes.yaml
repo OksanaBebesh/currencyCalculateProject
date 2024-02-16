@@ -7,3 +7,6 @@ currency_saves:
 currency_calculate:
   path: /currency/calculator
   controller: App\Controller\CurrencyCalculatorController::index
+dashboard:
+  path: /admin
+  controller: App\Controller\Admin\DashboardController::index
