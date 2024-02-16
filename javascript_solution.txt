@@ -1,0 +1,86 @@
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+    <script>
+
+        const apiKey = 'fca_live_QC0XQuzSAHlD8NbYkp7G1a9q1nhFUlGu53IwrLSw';
+        const urlListCurrency = "https://api.freecurrencyapi.com/v1/currencies?apikey";
+        const url = "https://api.freecurrencyapi.com/v1/latest?apikey"
+
+        const handleBtnCurreencyInfo = () => {
+           alert("sdfsdd");
+           getDataApi(url, apiKey); 
+           window.location.replace(window.location + "saving/currency")
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const data =  getDataApi(url, apiKey);            
+        })
+
+        const printSelectElements = (data, inBlock, addIdName, title) => {
+            const elementWithTitle = document.createElement("p");
+            elementWithTitle.innerHTML = title;
+            const elementSelect = document.createElement("select");
+            elementSelect.setAttribute("id", addIdName);
+            let elementOption = document.createElement("option");            
+
+            for (const [key, value] of Object.entries(data.data)) {
+            console.log(`${key}: ${value}`);
+                let opt = document.createElement("option");
+                opt.value = key;
+                opt.text = `${key}`;
+                elementSelect.add(opt);
+            }
+
+            inBlock.append(elementWithTitle)
+            inBlock.append(elementSelect);            
+        }
+
+        const getDataApi = async (url, apiKey) => {
+            const res = await fetch(`${url}=${apiKey}`);
+            const data = await res.json();
+
+            if (data != null) {
+                console.log(data);
+                const blockForCurrensyShow = document.getElementById("content");
+                printSelectElements(data, blockForCurrensyShow, "select-currency-from", "From currency:");
+                printSelectElements(data, blockForCurrensyShow, "select-currency-to", "To currency:");
+
+                return data;
+            } else
+            console.log("There are No Data");
+            return "";
+        }
+
+        const getDataApiLatestBySelectedCurrency = async (url, apiKey, baseCurrency, currencies) => {
+            const res = await fetch(`${url}=${apiKey}&base_currency=${baseCurrency}&currencies=${currencies}`);
+            const data = await res.json();
+
+            if (data != null) {
+                console.log(data);
+                console.log("result=", data.data[currencies] );
+                return data.data[currencies];
+            } else
+            console.log("There are No Data");
+            return "";
+        }
+
+
+        const handleGetLatest = async () => {
+            const baseCurrency = document.getElementById("select-currency-from").value;
+            const currencies = document.getElementById("select-currency-to").value;
+            const blockForResults = document.getElementById("result");
+            const count = document.getElementById("count").value;
+            console.log(count);
+            const data = await getDataApiLatestBySelectedCurrency(url, apiKey, baseCurrency, currencies);
+            console.log(data, " = data");
+            const result = Math.round(data * count);
+            printResult(result, blockForResults);
+        }
+
+        const printResult = (data, blockForResults) => {
+                blockForResults.innerHTML = data;
+        }
+    </script>
+</html>
