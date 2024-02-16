@@ -1,0 +1,9 @@
+index:
+  path: /
+  controller: App\Controller\DefaultController::index
+currency_saves:
+  path: /saving/currency
+  controller: App\Controller\SavingCurrencyController::index
+currency_calculate:
+  path: /currency/calculator
+  controller: App\Controller\CurrencyCalculatorController::index
