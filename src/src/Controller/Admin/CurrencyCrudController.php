@@ -20,7 +20,7 @@ class CurrencyCrudController extends AbstractCrudController
     {
         return [
             TextField::new('currency_name'),
-            BooleanField::new('value'),
+            BooleanField::new('visible'),
         ];
     }
     

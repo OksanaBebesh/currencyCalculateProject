@@ -8,25 +8,17 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h1>Index</h1>
+    <h1>Welcome to Currency Calculate</h1>
     <p class="important">
-        Welcome on Currency Calculate.
+        Choose ...
     </p>
 
     {{ form_start(form)}}
+
     {{ form_widget(form) }}
 
     {{ form_end(form) }}
 
     {{ result }}
-
-<button onClick = "handleBtnCurreencyInfo()">Get Currency List Info</button>
-    <div id="currencyData">
-        <h1 id="currencyHeader">Currency Info Page</h1>
-        <input type="text" value=1 id="count">
-        <div id="content"></div>
-        <button onClick = "handleGetLatest()">Get Currency Latest</button>
-        <div id="result"></div>
-    </div>
 
 {% endblock %}

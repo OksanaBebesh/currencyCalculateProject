@@ -42,16 +42,15 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Html');
+            ->setTitle('Admin Panel Currency Calculate');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Currency', 'fas fa-list', Currency::class);
-        yield MenuItem::linkToUrl('Visit public website', null, '/');
-        yield MenuItem::linkToUrl('Visit second public website', null, '/');
+        yield MenuItem::linkToUrl('Visit main page', null, '/');
+        yield MenuItem::linkToUrl('Get Data and Save in DB', null, '/saving/currency');
         yield MenuItem::linkToUrl('Search in Google', 'fab fa-google', 'https://google.com');
-        // yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
     }
 }

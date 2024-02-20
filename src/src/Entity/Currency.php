@@ -21,13 +21,14 @@ class Currency
     private ?float $value = null;
 
     #[ORM\Column]
-    private int $visible = 0;
+    private bool $visible;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datetime_add = null;
 
     public function __construct() {
         $this->setDatetimeAdd(new \DateTime());
+        $this->visible = false;
     }
 
     public function getId(): ?int
@@ -59,12 +60,12 @@ class Currency
         return $this;
     }
 
-    public function getVisible(): int
+    public function getVisible(): bool
     {
         return $this->visible;
     }
 
-    public function setVisible(float $visible): static
+    public function setVisible(bool $visible): static
     {
         $this->visible = $visible;
 
@@ -83,7 +84,7 @@ class Currency
         return $this;
     }
 
-    private function getApiData($baseCurrency, $currencies, $count) {
+    private function getApiData(string $baseCurrency, string $currencies, int $count) {
         $url = 'https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_QC0XQuzSAHlD8NbYkp7G1a9q1nhFUlGu53IwrLSw&base_currency=' . $baseCurrency . '&currencies=' . $currencies;
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -91,12 +92,16 @@ class Currency
         curl_setopt($curl, CURLOPT_HEADER, false);
         $data = curl_exec($curl);
         $dataFromApiClean = json_decode($data, true)["data"][$currencies];
-
         curl_close($curl);
+
+        return $dataFromApiClean;
+    }
+
+    public function convert(string $baseCurrency, string $currencies, int $count) {
+        $dataFromApiClean = $this->getApiData($baseCurrency, $currencies, $count);
         $stringAnswer =  $count . " " . $baseCurrency . " To " . $currencies . " = ";
-
-
-        return $stringAnswer . intval($count * $dataFromApiClean);
+        $convertSum = intval($count * $dataFromApiClean);
+        return $stringAnswer . $convertSum;
     }
 
 }

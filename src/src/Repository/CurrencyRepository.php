@@ -21,28 +21,18 @@ class CurrencyRepository extends ServiceEntityRepository
         parent::__construct($registry, Currency::class);
     }
 
-//    /**
-//     * @return Currency[] Returns an array of Currency objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Currency[] Returns an array of Currency objects
+    */
+   public function getListOfCurrencyByVisibility($value): array
+   {
+       return $this->createQueryBuilder('Currency')
+           ->andWhere('Currency.visible = :visibleParam')
+           ->setParameter('visibleParam', $value)
+           ->orderBy('Currency.currency_name', 'ASC')
+           ->getQuery()
+           ->getArrayResult()
+       ;
+   }
 
-//    public function findOneBySomeField($value): ?Currency
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
