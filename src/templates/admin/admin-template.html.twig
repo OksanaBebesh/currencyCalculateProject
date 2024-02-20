@@ -3,8 +3,9 @@
 {% block content_title %}Admin Panel Currency Calculate{% endblock %}
 {% block page_actions %}
     <a class="btn btn-primary" href="/">Main page</a>
-     <a class="btn btn-primary" href="">Currency</a>
-      <a class="btn btn-primary" href="...">Some Action</a>
+     <a class="btn btn-primary" 
+        href="/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CCurrencyCrudController">Currency</a>
+      <a class="btn btn-primary" href="/saving/currency">Get Data by API and Save in DB</a>
 {% endblock %}
 
 {% block main %}

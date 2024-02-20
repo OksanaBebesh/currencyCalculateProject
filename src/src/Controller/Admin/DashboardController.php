@@ -16,27 +16,7 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        // return parent::index();
-
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-
-
-        return $this->render('admin/admin-template.html.twig', [
-            'data' => ""
-        ]);
+        return $this->render('admin/admin-template.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -50,7 +30,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Currency', 'fas fa-list', Currency::class);
         yield MenuItem::linkToUrl('Visit main page', null, '/');
-        yield MenuItem::linkToUrl('Get Data and Save in DB', null, '/saving/currency');
+        yield MenuItem::linkToUrl('Get Data by API and Save in DB', null, '/saving/currency');
         yield MenuItem::linkToUrl('Search in Google', 'fab fa-google', 'https://google.com');
     }
 }

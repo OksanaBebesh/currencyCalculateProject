@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 
 class CurrencyCrudController extends AbstractCrudController
 {
@@ -14,13 +15,13 @@ class CurrencyCrudController extends AbstractCrudController
     {
         return Currency::class;
     }
-
     
     public function configureFields(string $pageName): iterable
     {
         return [
             TextField::new('currency_name'),
             BooleanField::new('visible'),
+            Field::new('value'),
         ];
     }
     
