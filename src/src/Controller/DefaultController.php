@@ -11,6 +11,7 @@ use App\Entity\Currency;
 use App\Repository\CurrencyRepository;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\{TextType,SubmitType};
+use App\Factories\ApiCurrencyFactory;
 
 class DefaultController extends AbstractController
 {
@@ -19,6 +20,20 @@ class DefaultController extends AbstractController
     {        
         $result = $request->query->get('result');;
         //Getting data from DB. Choose Only visible currency
+
+        // Example usage Factory:
+
+        // Creating a currency api connection by NBPplApi
+        $nbpApiService = ApiCurrencyFactory::createCurrencyApi('NBPplApiService');
+        // var_dump($nbpApiService );
+        $chosenService = $nbpApiService->getRate(5,6,7) . "\n"; // Output: NBPplApi
+        // echo $result . "\n";
+
+        // Creating currency api connection by Freecurrencyapi
+        $FreecurrencyApiService = ApiCurrencyFactory::createCurrencyApi('FreecurrencyApiService');
+        $chosenService = $FreecurrencyApiService->getRate(7,8,9) . "\n"; // Output: Freecurrencyapi
+        // echo $result . "\n";
+
         $currencyVisible = $currencyRepository->getListOfCurrencyByVisibility(true);
         $listOfVisibleCurrency = array_map(function($item) {return [$item["currency_name"] => $item["currency_name"]];}, $currencyVisible);
 
@@ -46,7 +61,8 @@ class DefaultController extends AbstractController
 
         return $this->render('Default/default.html.twig', [
             'form' => $form->createView(),
-            'result' => $result
+            'result' => $result,
+            'serviceInUse' => $chosenService,
         ]);
     }
 }
