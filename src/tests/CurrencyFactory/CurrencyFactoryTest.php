@@ -7,7 +7,7 @@ use App\Factories\ApiCurrencyFactory;
 use App\Services\FreecurrencyApiService;
 use App\Services\NBPplApiService;
 
-class CurrecyFactoryTest extends TestCase
+class CurrencyFactoryTest extends TestCase
 {
     /**
      * @dataProvider getCurrencyApi
@@ -15,6 +15,7 @@ class CurrecyFactoryTest extends TestCase
     public function testCreateCurrencyApi(string $params)
     {
         $argumentToCheck = ApiCurrencyFactory::createCurrencyApi($params);
+        echo ($argumentToCheck);
         $this->assertSame($params, $argumentToCheck);
     }
 

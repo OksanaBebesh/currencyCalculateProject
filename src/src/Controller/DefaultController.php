@@ -32,19 +32,22 @@ class DefaultController extends AbstractController
         // Creating currency api connection by Freecurrencyapi
         $FreecurrencyApiService = ApiCurrencyFactory::createCurrencyApi('FreecurrencyApiService');
         $chosenService = $FreecurrencyApiService->getRate(7,8,9) . "\n"; // Output: Freecurrencyapi
+        $listOfCurrency = $FreecurrencyApiService->getData();
+
         // echo $result . "\n";
 
-        $currencyVisible = $currencyRepository->getListOfCurrencyByVisibility(true);
-        $listOfVisibleCurrency = array_map(function($item) {return [$item["currency_name"] => $item["currency_name"]];}, $currencyVisible);
+        // $currencyVisible = $currencyRepository->getListOfCurrencyByVisibility(true);
+        // $listOfVisibleCurrency = array_map(function($item) {return [$item["currency_name"] => $item["currency_name"]];}, $currencyVisible);
+
 
         $defaultData = ['message' => ''];
         $form = $this->createFormBuilder($defaultData)
             ->add('count', TextType::class)
             ->add('From', ChoiceType::class, [
-                'choices'  => $listOfVisibleCurrency
+                'choices'  => $listOfCurrency
             ])
             ->add('To', ChoiceType::class, [
-                'choices'  => $listOfVisibleCurrency
+                'choices'  => $listOfCurrency
             ])
             ->add('send', SubmitType::class)
             ->getForm();
@@ -63,6 +66,7 @@ class DefaultController extends AbstractController
             'form' => $form->createView(),
             'result' => $result,
             'serviceInUse' => $chosenService,
+            'currencyList' => $listOfCurrency
         ]);
     }
 }

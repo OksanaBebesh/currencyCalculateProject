@@ -10,9 +10,9 @@ final class ApiCurrencyFactory  {
     public static function createCurrencyApi($type) {
         switch ($type) {
             case 'NBPplApiService':
-                return new FreecurrencyApiService();
-            case 'FreecurrencyApiService':
                 return new NBPplApiService();
+            case 'FreecurrencyApiService':
+                return new FreecurrencyApiService();
             default:
                 return "Invalid CurrencyApi type specified.";
         }
