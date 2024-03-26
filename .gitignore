@@ -287,3 +287,10 @@
 .docker/data/db/sys/x@0024waits_by_user_by_latency.frm
 .docker/data/db/sys/x@0024waits_global_by_latency.frm
 .docker/data/db/mysql.sock
+src/bin/phpunit
+src/tests/bootstrap.php
+src/.env.test
+src/phpunit.xml.dist
+src/symfony.lock
+src/symfony.lock
+src/symfony.lock
