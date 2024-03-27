@@ -20,7 +20,7 @@ final class Version20240215131616 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE currency (id INT AUTO_INCREMENT NOT NULL, currency_name VARCHAR(255) NOT NULL, value DOUBLE PRECISION NOT NULL, datetime_add DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE currency (id INT AUTO_INCREMENT NOT NULL, currency_name VARCHAR(255) NOT NULL, value DOUBLE PRECISION NOT NULL, datetime_add DATE NOT NULL,visible INT NOT NULL DEFAULT 0, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
