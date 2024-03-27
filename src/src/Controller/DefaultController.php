@@ -26,12 +26,12 @@ class DefaultController extends AbstractController
         // Creating a currency api connection by NBPplApi
         $nbpApiService = ApiCurrencyFactory::createCurrencyApi('NBPplApiService');
         // var_dump($nbpApiService );
-        $chosenService = $nbpApiService->getRate(5,6,7) . "\n"; // Output: NBPplApi
+        // $chosenService = $nbpApiService->getRate() . "\n"; // Output: NBPplApi
         // echo $result . "\n";
 
         // Creating currency api connection by Freecurrencyapi
         $FreecurrencyApiService = ApiCurrencyFactory::createCurrencyApi('FreecurrencyApiService');
-        $chosenService = $FreecurrencyApiService->getRate(7,8,9) . "\n"; // Output: Freecurrencyapi
+        $chosenService = $FreecurrencyApiService->getRate(); // Output: Freecurrencyapi
         $listOfCurrency = $FreecurrencyApiService->getData();
 
         // echo $result . "\n";

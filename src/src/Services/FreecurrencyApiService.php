@@ -4,8 +4,8 @@ namespace App\Services;
 use App\Interfaces\CurrencyConverterInterface;
 
 class FreecurrencyApiService implements CurrencyConverterInterface {
-    public function getRate($amount=null, $fromCurrency=null, $toCurrency=null) :string {
-        $data = file_get_contents('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_QC0XQuzSAHlD8NbYkp7G1a9q1nhFUlGu53IwrLSw&base_currency=' . $baseCurrency . '&currencies=' . $currencies);
+    public function getRate($amount=null, $fromCurrency=null, $toCurrency=null) :array {
+        $data = file_get_contents('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_QC0XQuzSAHlD8NbYkp7G1a9q1nhFUlGu53IwrLSw&base_currency=' . $fromCurrency . '&currencies=' . $toCurrency);
         return json_decode($data, true)["data"];
     }
 
