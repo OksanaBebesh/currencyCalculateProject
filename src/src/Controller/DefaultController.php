@@ -50,15 +50,18 @@ class DefaultController extends AbstractController
                 'choices'  => $listOfCurrency
             ])
             ->add('send', SubmitType::class)
+            ->add('get_best_item', SubmitType::class)
             ->getForm();
 
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $calculate = $form->getData();
-                $result = (new Currency)->convert($calculate["From"], $calculate["To"], $calculate["count"]);
+                $currencies = $calculate["To"];
+                $a = $FreecurrencyApiService->getListOfCurrencyForPeriod($currencies);
+                // $result = (new Currency)->convert($calculate["From"], $calculate["To"], $calculate["count"]);
 
-                return  $this->redirectToRoute('index', ["result" => $result]);
+                return  $this->redirectToRoute('index', ["result" => $a]);
             }    
             
 
